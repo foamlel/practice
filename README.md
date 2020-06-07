@@ -1,0 +1,2 @@
+# practice
+Exercises for beginners
