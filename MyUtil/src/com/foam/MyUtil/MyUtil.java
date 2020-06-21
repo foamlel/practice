@@ -22,7 +22,7 @@ public class MyUtil {
         //2.创建连接
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(url, user, password);
+            conn = DriverManager.getConnection(url, user, password);//使用自己数据库的相应信息
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,9 +90,12 @@ public class MyUtil {
                 T m = cls.newInstance();
                 for (int i = 0; i <rsd.getColumnCount() ; i++) {
                     String Column_Name = rsd.getColumnName(i+1);
+                    //获取查询的表的列名
                     Object value = rs.getObject(Column_Name);
+                    //获取列名的相应的值
                     Field field = cls.getDeclaredField(Column_Name);
-                    field.setAccessible(true);
+                    //反射创建对象
+                    field.setAccessible(true);//修改类中私有属性的权限
                     field.set(m,value);
                 }
                 date.add(m);
